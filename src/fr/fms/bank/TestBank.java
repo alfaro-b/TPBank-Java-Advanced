@@ -26,6 +26,13 @@ public class TestBank {
 		System.out.println("----- LISTE DES COMPTES BANCAIRES -----");
 		dao.readAll().forEach(System.out::println);
 
+		// =========================
+		// READ
+		// =========================
+
+		System.out.println("\n----- READ -----");
+		System.out.println(dao.read("FR-1111-2222"));
+		
 	}
 
 }

@@ -75,4 +75,47 @@ public class BankAccountDao {
 
 		return bankAccounts;
 	}
+	
+	// =========================
+	// READ
+	// =========================
+
+	/**
+	 * Recherche un compte bancaire grâce à son numéro de compte.
+	 *
+	 * @param accountNumber numéro du compte recherché
+	 * @return bankAccount correspondant au numéro de compte,
+	 *         ou null si aucun compte n'est trouvé
+	 */
+	public BankAccount read(String accountNumber) {
+
+		String sql =
+				"SELECT * FROM bank_account WHERE AccountNumber = ?";
+
+		try (
+			Connection connection = getConnection();
+			PreparedStatement ps = connection.prepareStatement(sql)
+		) {
+
+			ps.setString(1, accountNumber);
+
+			try (ResultSet resultSet = ps.executeQuery()) {
+
+				if (resultSet.next()) {
+
+					return new BankAccount(
+						resultSet.getString("AccountNumber"),
+						resultSet.getString("Holder"),
+						resultSet.getDouble("Balance")
+					);
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+	
 }
