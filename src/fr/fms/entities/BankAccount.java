@@ -127,5 +127,16 @@ public class BankAccount {
 		 // Puis on le dépose sur un compte destinataire
 		 destination.deposit(amount);
 	}
+
+	
+	/**
+	 * Vérifie que le numéro du compte bancaire est au bon format
+	 * 
+	 * @param accountNumber numéro du compte bancaire
+	 * @return true si le format est valide
+	 */
+	public static boolean isValidAccountNumber(String accountNumber) {
+		return accountNumber.matches("^FR-\\d{4}-\\d{4}$");
+	}
 	
 }
