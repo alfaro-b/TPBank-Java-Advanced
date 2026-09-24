@@ -1,6 +1,7 @@
 package fr.fms.bank;
 
 import fr.fms.dao.BankAccountDao;
+import fr.fms.entities.BankAccount;
 
 /**
  * Classe permettant de tester les différentes opérations réalisées sur les comptes bancaires avec BankAccountDao.
@@ -31,8 +32,23 @@ public class TestBank {
 		// =========================
 
 		System.out.println("\n----- READ -----");
+		// Un compte valide
 		System.out.println(dao.read("FR-1111-2222"));
+		// Un compte qui n'existe pas
+		System.out.println(dao.read("FR-0000-2222"));
 		
+		// =========================
+		// CREATE
+		// =========================
+
+		System.out.println("\n----- INSERT -----");
+
+		BankAccount bankAccountCreated =
+				new BankAccount("FR-4321-8765", "Sophie Desgran", 3000.00);
+
+		dao.create(bankAccountCreated);
+		System.out.println(bankAccountCreated);
+
 	}
 
 }

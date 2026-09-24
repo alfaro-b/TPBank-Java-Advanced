@@ -118,4 +118,36 @@ public class BankAccountDao {
 		return null;
 	}
 	
+	// =========================
+	// CREATE
+	// =========================
+
+	/**
+	 * Ajoute un nouveau compte bancaire dans la base de données.
+	 *
+	 * @param bankAccount compte bancaire à ajouter 
+	 */
+	public void create(BankAccount bankAccount) {
+
+		String sql =
+				"INSERT INTO bank_account "
+				+ "(AccountNumber, Holder, Balance) "
+				+ "VALUES (?, ?, ?)";
+
+		try (
+			Connection connection = getConnection();
+			PreparedStatement ps = connection.prepareStatement(sql)
+		) {
+
+			ps.setString(1, bankAccount.getAccountNumber());
+			ps.setString(2, bankAccount.getHolder());
+			ps.setDouble(3, bankAccount.getBalance());
+
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
