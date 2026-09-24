@@ -2,6 +2,7 @@ package fr.fms.bank;
 
 import fr.fms.dao.BankAccountDao;
 import fr.fms.entities.BankAccount;
+import fr.fms.exception.InsufficientBalanceException;
 
 /**
  * Classe permettant de tester les différentes opérations réalisées sur les comptes bancaires avec BankAccountDao.
@@ -53,12 +54,28 @@ public class TestBank {
 		// DEPOT D'ARGENT
 		// =========================
 		
-		System.out.println("\n----- DEPOSIT -----");
-		BankAccount bankAccountToDeposit = dao.read("FR-1111-2222");
-		System.out.println("Avant" + bankAccountToDeposit);
-		bankAccountToDeposit.deposit(200);
-		dao.update(bankAccountToDeposit);
-		System.out.println("Après : " + dao.read(bankAccountToDeposit.getAccountNumber()));
+//		System.out.println("\n----- DEPOSIT -----");
+//		BankAccount bankAccountToDeposit = dao.read("FR-1111-2222");
+//		System.out.println("Avant dépôt : " + bankAccountToDeposit);
+//		bankAccountToDeposit.deposit(200);
+//		dao.update(bankAccountToDeposit);
+//		System.out.println("Après dépôt : " + dao.read(bankAccountToDeposit.getAccountNumber()));
+		
+		// =========================
+		// RETRAIT D'ARGENT
+		// =========================
+		
+		System.out.println("\n----- WITHDRAW -----");
+		BankAccount bankAccountToWithdraw = dao.read("FR-1111-2222");
+		System.out.println("Avant retrait : " + bankAccountToWithdraw);
+		try {
+			bankAccountToWithdraw.withdraw(200);
+			dao.update(bankAccountToWithdraw);
+		} catch (InsufficientBalanceException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		System.out.println("Après retrait : " + dao.read(bankAccountToWithdraw.getAccountNumber()));
 
 	}
 
