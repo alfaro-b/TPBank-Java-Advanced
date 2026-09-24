@@ -83,9 +83,17 @@ public class BankAccount {
 		return "BankAccount [accountNumber=" + accountNumber + ", holder=" + holder + ", balance=" + balance + "]";
 	}
 	
-	// To do
+	/**
+	 * Dépose un montant sur le compte bancaire.
+	 *
+	 * @param amount montant à déposer
+	 */
 	public void deposit(double amount) {
+		if (amount <= 0) {
+			throw new IllegalArgumentException ("Le montant doit être supérieur à 0");
+		}
 		
+		balance += amount;
 	}
 	
 	// To do
