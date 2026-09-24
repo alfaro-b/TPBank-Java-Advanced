@@ -91,7 +91,33 @@ public class BankApp {
 					break;
 	
 				case 4:
-					// dépôt
+					// Déposer de l'argent sur un compte
+					System.out.println("Saisissez le numéro du compte bancaire sur lequel vous voulez effectuer un dépôt : (Format FR-XXXX-XXXX)");
+					String accountNumberToDeposit = scanner.nextLine();
+					
+					if (!BankAccount.isValidAccountNumber(accountNumberToDeposit)) {
+						System.out.println("Numéro invalide. Format attendu : FR-XXXX-XXXX");
+						break;
+					}
+					BankAccount bankAccountToDeposit = dao.read(accountNumberToDeposit);
+
+					if (bankAccountToDeposit == null) {
+						System.out.println("Aucun compte bancaire trouvé.");
+						break;
+					}
+					
+					System.out.println("Saisissez le montant du dépôt : ");
+					double amount = scanner.nextDouble();
+					scanner.nextLine();
+					
+					System.out.println("Avant dépôt : " + bankAccountToDeposit);
+					try {
+					bankAccountToDeposit.deposit(amount);
+					dao.update(bankAccountToDeposit);
+					System.out.println("Après dépôt : " + dao.read(bankAccountToDeposit.getAccountNumber()));
+					} catch (IllegalArgumentException e) {
+						System.out.println(e.getMessage());
+					}
 					break;
 	
 				case 5:
