@@ -115,9 +115,17 @@ public class BankAccount {
 		balance -= amount;
 	}
 	
-	// To do
-	public void transfer(BankAccount destination, double amount) {
-		
+	/**
+	 * Effectue un virement vers un autre compte bancaire.
+	 *
+	 * @param destination compte bancaire sur lequel transférer l'argent
+	 * @param amount montant à virer
+	 * @throws InsufficientBalanceException 
+	 */	public void transfer(BankAccount destination, double amount) throws InsufficientBalanceException {
+		 // On retire l'argent du compte
+		 withdraw(amount);
+		 // Puis on le dépose sur un compte destinataire
+		 destination.deposit(amount);
 	}
 	
 }
