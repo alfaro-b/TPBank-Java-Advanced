@@ -42,40 +42,40 @@ public class TestBank {
 		// CREATE
 		// =========================
 
-//		System.out.println("\n----- INSERT -----");
-//
-//		BankAccount bankAccountCreated =
-//				new BankAccount("FR-4321-8765", "Sophie Desgran", 3000.00);
-//
-//		dao.create(bankAccountCreated);
-//		System.out.println(bankAccountCreated);
+		System.out.println("\n----- INSERT -----");
+
+		BankAccount bankAccountCreated =
+				new BankAccount("FR-4321-8765", "Sophie Desgran", 3000.00);
+
+		dao.create(bankAccountCreated);
+		System.out.println(bankAccountCreated);
 		
 		// =========================
 		// DEPOT D'ARGENT
 		// =========================
 		
-//		System.out.println("\n----- DEPOSIT -----");
-//		BankAccount bankAccountToDeposit = dao.read("FR-1111-2222");
-//		System.out.println("Avant dépôt : " + bankAccountToDeposit);
-//		bankAccountToDeposit.deposit(200);
-//		dao.update(bankAccountToDeposit);
-//		System.out.println("Après dépôt : " + dao.read(bankAccountToDeposit.getAccountNumber()));
+		System.out.println("\n----- DEPOSIT -----");
+		BankAccount bankAccountToDeposit = dao.read("FR-1111-2222");
+		System.out.println("Avant dépôt : " + bankAccountToDeposit);
+		bankAccountToDeposit.deposit(200);
+		dao.update(bankAccountToDeposit);
+		System.out.println("Après dépôt : " + dao.read(bankAccountToDeposit.getAccountNumber()));
 		
 		// =========================
 		// RETRAIT D'ARGENT
 		// =========================
 		
-//		System.out.println("\n----- WITHDRAW -----");
-//		BankAccount bankAccountToWithdraw = dao.read("FR-1111-2222");
-//		System.out.println("Avant retrait : " + bankAccountToWithdraw);
-//		try {
-//			bankAccountToWithdraw.withdraw(200);
-//			dao.update(bankAccountToWithdraw);
-//		} catch (InsufficientBalanceException e) {
-//			System.out.println(e.getMessage());
-//		}
-//		
-//		System.out.println("Après retrait : " + dao.read(bankAccountToWithdraw.getAccountNumber()));
+		System.out.println("\n----- WITHDRAW -----");
+		BankAccount bankAccountToWithdraw = dao.read("FR-1111-2222");
+		System.out.println("Avant retrait : " + bankAccountToWithdraw);
+		try {
+			bankAccountToWithdraw.withdraw(200);
+			dao.update(bankAccountToWithdraw);
+		} catch (InsufficientBalanceException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		System.out.println("Après retrait : " + dao.read(bankAccountToWithdraw.getAccountNumber()));
 		
 		// =========================
 		// VIREMENT D'ARGENT
