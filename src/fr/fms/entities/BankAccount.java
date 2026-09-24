@@ -1,5 +1,7 @@
 package fr.fms.entities;
 
+import fr.fms.exception.InsufficientBalanceException;
+
 /**
  * Représente un compte bancaire.
  * 
@@ -96,9 +98,21 @@ public class BankAccount {
 		balance += amount;
 	}
 	
-	// To do
-	public void withdraw(double amount) {
+	/**
+	 * Retire un montant sur le compte bancaire.
+	 *
+	 * @param amount montant à retirer
+	 * @throws InsufficientBalanceException si le solde est insuffisant
+	 */
+	public void withdraw(double amount) throws InsufficientBalanceException {
+		if (amount <= 0) {
+			throw new IllegalArgumentException ("Le montant doit être supérieur à 0");
+		}
+		if(amount > balance) {
+			throw new InsufficientBalanceException("Le solde est insuffisant pour effectuer le retrait.");
+		}
 		
+		balance -= amount;
 	}
 	
 	// To do
