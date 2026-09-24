@@ -150,4 +150,37 @@ public class BankAccountDao {
 		}
 	}
 	
+	// =========================
+	// UPDATE
+	// =========================
+
+	/**
+	 * Met à jour un compte bancaire existant dans la base de données.
+	 *
+	 * Le compte bancaire est recherché grâce à son numéro de compte.
+	 *
+	 * @param bankAccount compte bancaire contenant les nouvelles informations
+	 */
+	public void update(BankAccount bankAccount) {
+
+		String sql =
+				"UPDATE bank_account "
+				+ "SET Holder = ?, Balance = ? "
+				+ "WHERE AccountNumber = ?";
+
+		try (
+			Connection connection = getConnection();
+			PreparedStatement ps = connection.prepareStatement(sql)
+		) {
+
+			ps.setString(1, bankAccount.getHolder());
+			ps.setDouble(2, bankAccount.getBalance());
+			ps.setString(3, bankAccount.getAccountNumber());
+
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
