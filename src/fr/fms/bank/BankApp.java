@@ -3,6 +3,7 @@ package fr.fms.bank;
 import java.util.Scanner;
 
 import fr.fms.dao.BankAccountDao;
+import fr.fms.entities.BankAccount;
 
 /**
  * Application console permettant à un conseiller bancaire de gérer les comptes clients.
@@ -39,13 +40,31 @@ public class BankApp {
 				System.out.print("Votre choix : ");
 	
 				choice = scanner.nextInt();
+				scanner.nextLine();
 	
 				switch (choice) {
 				case 1:
-					// création
+					// Création d'un compte bancaire
+					System.out.println("Saisissez le numéro du compte bancaire à créer: (Format FR-XXXX-XXXX)");
+					String accountNumberToCreate = scanner.nextLine();
+					if (!BankAccount.isValidAccountNumber(accountNumberToCreate)) {
+						System.out.println(
+								"Numéro invalide. Format attendu : FR-XXXX-XXXX");
+						break;
+					}
+					
+					System.out.println("Saisissez le prénom et le nom du titulaire du compte");
+					String holderToCreate = scanner.nextLine();
+					
+					BankAccount bankAccountCreated =
+							new BankAccount(accountNumberToCreate, holderToCreate, 0);
+
+					dao.create(bankAccountCreated);
+					System.out.println(bankAccountCreated);
 					break;
 	
 				case 2:
+					// Afficher tous les comptes
 					dao.readAll()
 						.stream()
 						.forEach(account -> System.out.println(account));
