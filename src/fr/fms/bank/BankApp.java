@@ -44,7 +44,7 @@ public class BankApp {
 	
 				switch (choice) {
 				case 1:
-					// Création d'un compte bancaire
+					// Créer un compte bancaire
 					System.out.println("Saisissez le numéro du compte bancaire à créer: (Format FR-XXXX-XXXX)");
 					String accountNumberToCreate = scanner.nextLine();
 					if (!BankAccount.isValidAccountNumber(accountNumberToCreate)) {
@@ -71,7 +71,23 @@ public class BankApp {
 					break;
 	
 				case 3:
-					// consultation
+					// Consulter un compte
+					System.out.println("Saisissez le numéro du compte bancaire que vous voulez consulter: (Format FR-XXXX-XXXX)");
+					String accountNumberToRead = scanner.nextLine();
+					
+					if (!BankAccount.isValidAccountNumber(accountNumberToRead)) {
+						System.out.println("Numéro invalide. Format attendu : FR-XXXX-XXXX");
+						break;
+					}
+					BankAccount bankAccountToRead = dao.read(accountNumberToRead);
+
+					if (bankAccountToRead == null) {
+						System.out.println("Aucun compte bancaire trouvé.");
+						break;
+					}
+
+					System.out.println(bankAccountToRead);
+
 					break;
 	
 				case 4:
