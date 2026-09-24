@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 import fr.fms.entities.BankAccount;
 
+/**
+ * DAO permettant d'effectuer les opérations CRUD sur les comptes bancaires de la base de données Bank.
+ */
 public class BankAccountDao {
 	// =========================
 	// PARAMETRES DE CONNEXION
